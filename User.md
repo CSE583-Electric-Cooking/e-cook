@@ -12,8 +12,7 @@ Users:
 
 
 
-Skill level ranking
-  Least to most skill:
+Skill level ranking: least to most skill:
   1) Researchers/Grad Students
   2) PI
   3) Policy Makers/Utilities
