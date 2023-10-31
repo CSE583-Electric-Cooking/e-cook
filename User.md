@@ -12,7 +12,7 @@ Users:
 
 
 
-Skill Level Ranking
+Skill level ranking
   Least to most skill:
   1) Researchers/Grad Students
   2) PI
