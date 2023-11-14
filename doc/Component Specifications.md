@@ -1,0 +1,7 @@
+| **Users** | **Component Name** | **What It Does** | **Input** | **Output** | **How use other components** |
+|---|---|---|---|---|---|
+| Graduate Students | Directory Data Import (DDI) | Takes new data and provides any relevant preprocessing/storage | New CSV: unadulterated data | Post CSV: New data formatted to work within any tools developed by the software | Accesses new data for analysis in Valid Data Format  |
+| Graduate Students | Valid Data Format (VDF) | Verifies that data has been pre-processed and formatted to run appropriately within software | Post CSV | True (if no format errors found);<br>Else False → Error Message | Uses DDI;<br>Feeds into UFC to select what to analyze and highlight |
+| Researchers/ Policymakers/ Utilities | User Flow Control (UFC) | Allows user to select what type of data results to analyze and process | User choice input | Data Subset | Manipulates VDF to create subsets of data for Vis |
+| N/A | Visualizer (Vis) | Provides relevant plots based on input parameters | Data Subset | Graphs, plots;<br>Generate reports (e.g., matplotlib → images → markdowns) | Generates visuals for dashboard |
+| Researchers, Policymakers, Utilities, Community Members | Dashboard (Dash) | Shows visualization in friendly GUI; creates different layers for relevant data for users | Graphs, plots;<br>Generate reports (e.g., matplotlib → images → markdowns) | GUI | Flows from Vis |
