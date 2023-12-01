@@ -15,7 +15,7 @@ def extract_data():
     os.chdir(('../data/kosko'))
     files = os.listdir()
     kosko_data = []
-    for file in files: 
+    for file in files:
         if ".csv" in file:
             kosko_data.append(file)
     # Sorts list of .csv data
