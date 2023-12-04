@@ -12,7 +12,7 @@ import numpy as np
 class Kosko:
 
     def __init__(self):
-        os.chdir("../Data/Kosko")
+        os.chdir("../data/Kosko")
         kosko_data = sorted(os.listdir())
         if not "Kosko_processed.csv" in kosko_data:
             ids = []
