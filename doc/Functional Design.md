@@ -9,21 +9,38 @@ The purpose of the software package is to create a cohesive data visualization t
 
 ## User Profile
 
-| Users                              | What do they want to do with the tool?                                                                                                                                                                                      | What needs and desires do they want for the tool?                                                                                                                           | What is their skill level?                                                             |
-|------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| _ex. Ram is a bank customer_         | _ex. Ram wants to check his balance, deposit money, take out money_                                                                                                                                                           | _ex. Ram wants a safe and secure interface for interacting with the ATM._                                                                                                     | _ex. Ram’s job does not involve technical skills and he values a simple user interface._ |
-| _ex. Valentina is an ATM technician_ | _ex. She services ATMs as part of preventive maintenance, applies hardware and software updates and performs emergency repairs._                                                                                              | _ex. For maintenance and updates she will follow a standard protocol. For repairs, she needs access to a diagnostic interface._                                               | _ex. Valentina is highly technical and knows how to replace standardized parts._         |
-| Graduate Students                  | Aid in the processing of data for the purpose, likely to use this tool. Confirm that raw data meets software data formatting needs. Input in raw data to software for processing. Verify all results (i.e. sanity check)    | Identify patterns and trends through organizing data; diagnostic check                                                                                                      | GSs are highly technical and savvy to debug and code within the software               |
-| Researchers                        | First step in the pipeline for the analysis of trends, likely to use this tool; review the output dashboard to understand results                                                                                           | Will have a comprehensive dashboard to analyze data for driving research and extrapolating for other research locations and conditions                                      | Technical                                                                              |
-| Principal Investigators            | Supervisory role for researchers/grad students, some likelihood to directly use this tool; review the output dashboard to understand results                                                                                | Will have a comprehensive dashboard to analyze data for driving research and extrapolating for other research locations and conditions                                      | Technical                                                                              |
-| Policy Makers                      | Provide recommendations based on analysis from researchers, some likelihood to use this tool. Dashboard helps inform policies and decision making surrounding deployment electrical infrastructure                          | Access high-level trends (graphs, tables). Dashboard is more catered to understanding temporal trends to understand whether to drive policies for increased electrification | General understanding of concepts with limited technical understanding of actual code  |
-| Utilities                          | Use this tool to understand power quality, a tool for continuous improvement. Utilize dashboard to understand trends in demand and loads to ensure that infrastructure can meet demand and comply with electrical standards | Robust dashboard that provides information on all power parameters (voltage, current, power, energy, frequency)                                                             | Technical from a power standpoint                                                      |
-| Community Members/Customers        | Review dashboard to understand their own electricity usage from a use and financial standpoint                                                                                                                              | Need something simple and user friendly and easily understandable, track usage over time                                                                                    | Novice; need non-technical language                                                    |
+#### Graduate Students
+<ul>
+ <li>Technical users who will perform any pre-processing of the data, confirm that raw data meets software formatting and capabilities.</li>
+ <li>Input in raw data into software and validate all results (i.e. perform a sanity check to ensure software is functioning as intended).</li>
+ <li>Identify patterns and trends through organizing data.</li>
+ <li>Perform any diagnostic checks.</li>
+</ul>
+
+#### Researches / Principle Investigators
+<ul>
+ <li>Technical users who will perform the initial analysis using the results of the tool.</li>
+ <li>Will be able to access a comprehensive dashboard to analyze data that will aid in driving individual research objectives.</li>
+</ul>
+
+#### Policy Makers
+<ul>
+ <li>Users with a general understanding of the output of the tool but with limited technical understanding of the software package code</li>
+<li>Access high level trends (graphs, tables, etc.) from the dashboard to inform policies related to electrification and deployment of electrical infrastructure.</li>
+<li>Provide recommendations based on analysis from researchers.</li>
+</ul>
+ 
+#### Community Members
+<ul> 
+ <li>Users who will infrequently access the tool or may have ability to only access a simplified version of a dashboard to understand daily, monthly, and annual electricity consumption rates.</li>
+<li>These users will be novice in terms of technical understanding of the software.</li>
+<li>The dashboard visualization will be used to inform decision making around their own electricity usage and the associated costs with it.</li>
+</ul>
+
 
 ## Data Sources
 
 Data inputs into the software will be of two different formats including csv files of smart meter data as well as survey responses. There are two types of smart meter sensors that have been deployed within the communities: A2EI and Kosko. Each of these meters have separate csv files with voltage, current, energy, power, and frequency measurements when electric cooking appliances are being used. These data sets will be disaggregated according to meter type and ID. Plots of each of these measurements will be compiled to aid in visualization and identify trends. Qualitative survey data will integrate with the quantitative meter data to identify and delineate consumption patterns across neighborhoods, connection modalities, electricity bill payments, as well as gendered use.
-
 
 ## Use Cases 
 Use Case #1: Processing of large volumes of temporal data sets from smart meters.
