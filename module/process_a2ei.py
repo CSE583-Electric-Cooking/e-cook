@@ -21,10 +21,11 @@ class A2EI:
             self.df = pd.read_csv("../data/A2EI/A2EI.csv")
             self.process()
             data = {}
-            data['TIME'] = np.array(self.df['measurementTime'])
+            data['TIME'] = np.array(self.df['measurementTime'].values)
             data['VOLTAGE'] = self.df['meteredVoltageA']
             data['CURRENT'] = self.df['currentA']
             data['FREQUENCY'] = self.df['frequency']
+            data['POWER'] = self.df['meteredPower']
             data['ID'] = self.df['account_id']
             self.df = pd.DataFrame(data)
             self.save_to_csv()
@@ -57,9 +58,9 @@ class A2EI:
         self.df['measurementTime'] = self.df['measurementTime'].apply(reformat)
         self.df['sourceCreatedAt'] = self.df['sourceCreatedAt'].apply(reformat)
         self.df['createdOn'] = self.df['createdOn'].apply(reformat)
-        self.df['measurementTime'] = pd.to_datetime(self.df['measurementTime'])
-        self.df['sourceCreatedAt'] = pd.to_datetime(self.df['sourceCreatedAt'])
-        self.df['createdOn'] = pd.to_datetime(self.df['createdOn'])
+        #self.df['measurementTime'] = np.array(pd.to_datetime(self.df['measurementTime']))
+        #self.df['sourceCreatedAt'] = pd.to_datetime(self.df['sourceCreatedAt'])
+        #self.df['createdOn'] = pd.to_datetime(self.df['createdOn'])
 
     def pad_zeros(self):
         """
@@ -105,4 +106,3 @@ class A2EI:
         self.df = pd.concat([self.df, new_df], axis=0, ignore_index=True)
         # Rerun the processing procedure
         self.process()
-
