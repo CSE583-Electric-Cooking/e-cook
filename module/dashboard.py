@@ -18,7 +18,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
-    html.H1('Kampala Energy Dashboard', style={'color': '#ffffff', 'textAlign': 'center', 'background': '#343a40', 'padding': '10px', 'margin-bottom': '10px'}),
+    html.H1('Spark-Board', style={'color': '#ffffff', 'textAlign': 'center', 'background': '#343a40', 'padding': '10px', 'margin-bottom': '10px'}),
     
     html.Div([
         dcc.Dropdown(
@@ -62,7 +62,7 @@ app.layout = html.Div([
 )
 def update_dropdown_options(selected_data_source):
     if selected_data_source == 'kosko':
-        return [{'label': i, 'value': i} for i in df_kosko['ID'].unique()]
+        return [{'label': f"EM-{i}", 'value': i} for i in df_kosko['ID'].unique()]
     elif selected_data_source == 'a2ei':
         return [{'label': i, 'value': i} for i in df_a2ei['ID'].unique()]
     else:
@@ -98,6 +98,8 @@ def update_graph(selected_data_source, selected_account_id, kosko_status):
             go.Scatter(x=dff["TIME"], y=dff[col], mode='lines', name=col),
             row=i, col=1
         )
+        
+
         
     sensor = selected_data_source.capitalize()
     if selected_data_source == "a2ei": 
