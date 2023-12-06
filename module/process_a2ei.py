@@ -26,6 +26,7 @@ class A2EI:
             data['CURRENT'] = self.df['currentA']
             data['FREQUENCY'] = self.df['frequency']
             data['POWER'] = self.df['meteredPower']
+            data['POWER FACTOR'] = self.df['powerFactorA']
             data['ID'] = self.df['account_id']
             self.df = pd.DataFrame(data)
             self.save_to_csv()

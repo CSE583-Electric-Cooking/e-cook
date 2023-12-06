@@ -8,7 +8,25 @@ import pandas as pd
 
 # Initialize your data
 kosko = Kosko()  
-a2ei = A2EI()    
+a2ei = A2EI()
+
+class plotting:
+
+    def __init__(self):
+        pass
+
+    def data_query(self):
+        pass
+
+    def kosko_voltage(self): 
+        pass
+    
+    def kosko_current(self):
+        pass
+
+    def kosko_current(self):
+        pass
+
 
 df_kosko = kosko.df
 df_a2ei = a2ei.df
@@ -62,7 +80,12 @@ app.layout = html.Div([
 )
 def update_dropdown_options(selected_data_source):
     if selected_data_source == 'kosko':
-        return [{'label': f"EM-{i}", 'value': i} for i in df_kosko['ID'].unique()]
+        def name(i): 
+            if int(i) < 100: 
+                return f"0{i}" 
+            else:
+                return i
+        return [{'label': f"EM-{name(i)}", 'value': i} for i in df_kosko['ID'].unique()]
     elif selected_data_source == 'a2ei':
         return [{'label': i, 'value': i} for i in df_a2ei['ID'].unique()]
     else:
@@ -95,10 +118,11 @@ def update_graph(selected_data_source, selected_account_id, kosko_status):
     
     for i, col in enumerate(columns, start=1):
         fig.add_trace(
-            go.Scatter(x=dff["TIME"], y=dff[col], mode='lines', name=col),
+            go.Scatter(x=dff["TIME"], y=dff[col], mode='markers+lines', name=col,
+                    line=dict(width=2), marker=dict(size=1)),
             row=i, col=1
         )
-        
+
 
         
     sensor = selected_data_source.capitalize()
