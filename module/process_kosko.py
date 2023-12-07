@@ -1,17 +1,35 @@
-"""This script serves to process data for the Kosko sensor:
+"""
+This script serves to process data for the Kosko sensor:
     1) convert dates to time series
     2) appends multiple CSV files into a master list
-
-    Class can later be used for importing into main functinality as a tool to easiliy access processed data
+Class can later be used for importing into main functinality as a tool to easiliy access processed data
 """
-
 import os
 import pandas as pd
 import numpy as np
 
 class Kosko:
-
+    """
+    This class processes data for the Kosko sensor:
+    1) Converts dates to time series.
+    2) Appends multiple CSV files into a master list.
+    The class can later be used for importing into the main functionality
+    as a tool to easily access processed data.
+    Attributes:
+    - df (pd.DataFrame): Processed data stored in a Pandas DataFrame.
+    Note:
+    - The processed data is stored in the 'df' attribute.
+    Example:
+    kosko_instance = Kosko()
+    processed_data = kosko_instance.df
+    """
     def __init__(self):
+        """
+        Initializes the Kosko class. If 'Kosko_processed.csv' does not
+        exist, it reads and processes CSV files from the '../data/Kosko' directory
+        and creates a master DataFrame. If the file already exists, it reads the
+        preprocessed data.
+        """
         os.chdir("../data/Kosko")
         kosko_data = sorted(os.listdir())
         if not "Kosko_processed.csv" in kosko_data:
