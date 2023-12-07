@@ -6,3 +6,5 @@ The purpose of this project is to develop a software to analyze, synthesize, and
 ![Logo](https://github.com/CSE583-Electric-Cooking/e-cook/assets/114764862/29018e74-cdd1-46d6-a949-4d2424999bfd)
 
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/147548462/60e71067-f480-4428-803d-13a19f45f496)
+
+![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/147548462/0ff0637b-a1c1-49c1-9be0-27fb78d14a03)
