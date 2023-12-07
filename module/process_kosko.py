@@ -32,6 +32,7 @@ class Kosko:
             self.df['TIME'] = pd.to_datetime(self.df['TIME'], format='%Y-%m-%d %H:%M:%S', errors='coerce')
             self.df['TIME'] = np.array(self.df['TIME'])
             self.df = self.df.sort_values(by=['ID', 'TIME'])
+            self.df = self.df[self.df['TIME'].dt.year != 2022]
 
             self.df.to_csv("Kosko_processed.csv", index=False)
         else:
