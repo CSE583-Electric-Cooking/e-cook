@@ -1,0 +1,11 @@
+community_name,gender/female,gender/male,sensor/a2ei,sensor/kosko,modality/e,modality/d,modality/a,modality/f,ownership/rent,ownership/own,payment/umeme,payment/landlord,payment/kamyufu,appliance/percolator,appliance/hot_plate,appliance/cooking_coils,appliance/epc,appliance/blender,appliance/deep_fryer,appliance/juicer,appliance/popcorn_machine
+Kyebando Kisalosalo,3,2,3,2,1,0,0,0,1,0,0.0,0.0,1.0,3,1,2,0,2,0,0,0
+Makerere,3,3,4,2,3,0,0,0,3,0,0.0,0.0,3.0,4,1,3,0,0,0,0,0
+Kibuye,5,0,3,2,0,0,0,0,0,0,0.0,0.0,0.0,4,2,1,0,0,0,0,0
+Banda,3,1,2,2,1,0,0,0,1,0,0.0,0.0,1.0,2,0,2,0,0,2,0,0
+Lubya,1,1,0,2,0,0,0,0,0,0,0.0,0.0,0.0,2,0,0,0,0,0,0,0
+Katwe,3,3,3,3,2,2,0,0,4,0,0.0,2.0,2.0,6,0,2,0,0,0,0,0
+Nsambya Gogonya,6,0,3,3,0,1,4,1,2,4,5.0,0.0,1.0,5,3,1,0,1,0,2,1
+Mengo,3,3,4,2,5,0,0,1,3,3,1.0,0.0,6.0,6,4,0,0,0,0,0,0
+Bwaise,5,3,3,5,4,0,3,1,6,2,3.0,0.0,5.0,5,3,3,1,1,0,0,1
+Kanyanya,4,2,1,5,1,3,2,0,2,4,5.0,0.0,1.0,6,0,3,1,2,0,0,0
