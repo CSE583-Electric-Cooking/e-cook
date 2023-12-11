@@ -1,14 +1,22 @@
 """
-This module creates an interactive dashboard for visualizing data related 
-to communities in Kampala, Uganda.
+This dashboard generates an interactive web app in which users can quickly query
+and parse data from a collection of qualitative and quantiative results. This 
+includes time series and survery data regarding power usage.
+
+Depencies:
+    - os: file naviaigation
+    - pandas: CSV/Dataframe manipulation
+    - dash: Framework for the development of the app functionality
+    - plotly.graph_objs: plotting framework integrated into dash app
+    - sparkboard/sparkboard.plotting: custom module for the generation of plotly graphs
 """
 import os
+import pandas as pd
 from dash import Dash, html, dcc, callback, callback_context, Output, Input
 import dash_leaflet as dl
 import plotly.graph_objs as go
-import pandas as pd
 import sparkboard as sb
-from sparkboard.plotting import plot_survey,plot_time_series
+from sparkboard.plotting import PlotSurvey,PlotTimeSeries
 # Decimal GPS Coordinates for different communities in Kampala, Uganda
 coordinates = {
     "Kyebando Kisalosalo": (0.3561, 32.5800),
@@ -204,12 +212,12 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
         if survey_selection is None:
             return go.Figure()
         map_input = str(survey_selection['props']['children'])
-        subplot = plot_survey(df_survey, map_input)
+        subplot = PlotSurvey(df_survey, map_input)
         return subplot.dash_plot()
     else:
         return go.Figure()
     columns = [col for col in dff.columns if col not in columns_to_exclude]
-    subplot = plot_time_series(dff,columns,selected_data_source,kosko_status)
+    subplot = PlotTimeSeries(dff,columns,selected_data_source,kosko_status)
 
     return subplot.dash_plot()
 
