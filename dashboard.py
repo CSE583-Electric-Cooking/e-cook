@@ -203,7 +203,7 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
         ### GET DATA FROM MAP CLICKS
         if survey_selection is None:
             return go.Figure()
-        map_input = str(survey_selection[0]['props']['children'])
+        map_input = str(survey_selection['props']['children'])
         subplot = plot_survey(df_survey, map_input)
         return subplot.dash_plot()
     else:
@@ -232,9 +232,10 @@ def display_location_info(*args):
     if not ctx.triggered:
         return None
     button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    args = str(args)
     out =html.H1(f"{button_id}", style={'color': '#ffffff', 'textAlign': 'center',
                                         'background': '#343a40', 'padding': '10px',
-                                        'margin-bottom': '10px'}),
+                                        'margin-bottom': '10px'})
 
     return out
 
