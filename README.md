@@ -8,3 +8,16 @@ The purpose of this project is to develop a software to analyze, synthesize, and
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/147548462/60e71067-f480-4428-803d-13a19f45f496)
 
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/147548462/0ff0637b-a1c1-49c1-9be0-27fb78d14a03)
+
+
+## How to run the dashboard
+1. Download the repository onto your local system.  
+2. Do the following commands in your terminal:  
+```
+ 1  git clone git@github.com:CSE583-Electric-Cooking/e-cook.git
+ 2  cd e-cook/
+ 3  conda env create -f environment.yml
+ 4  conda activate ecook  
+ 5  python dashboard.py
+```  
+3. Click the hyperlink to open `SparkBoard` in your web browser.
