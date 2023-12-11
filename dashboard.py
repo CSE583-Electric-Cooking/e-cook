@@ -1,12 +1,27 @@
 """
-This module creates an interactive dashboard for visualizing data related 
-to communities in Kampala, Uganda.
+This module creates an interactive dashboard for visualizing data related to 
+to power consumption in a set of communities in Kampala, Uganda
+
+Nominal Dependcies:
+    -os: Efficient navigation to csv files
+    -pandas: Framework for csv/data manipulation
+    -dash: Framework for developing web app
+    -dash_leaflet: additional library for rendering map data
+    -plotly.graph_objs: Object based plotly graphs to embedd in visualization
+
+Custom Dependency:
+    -sparkboard: custom module for the generation of the plots for the application
+    -sparkboard.plotting: imports classes specific to this visualizaiton
+    -sparkboard.processing: TBD 
+
+To run this script:
+    command line: python dashboard.py
 """
 import os
+import pandas as pd
 from dash import Dash, html, dcc, callback, callback_context, Output, Input
 import dash_leaflet as dl
 import plotly.graph_objs as go
-import pandas as pd
 import sparkboard as sb
 from sparkboard.plotting import plot_survey,plot_time_series
 # Decimal GPS Coordinates for different communities in Kampala, Uganda
@@ -200,10 +215,9 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
         dff = df_a2ei[df_a2ei['ID'] == selected_account_id]
         columns_to_exclude = ["ID", "TIME"]
     elif selected_data_source == 'survey':
-        ### GET DATA FROM MAP CLICKS
         if survey_selection is None:
             return go.Figure()
-        map_input = str(survey_selection[0]['props']['children'])
+        map_input = str(survey_selection['props']['children'])
         subplot = plot_survey(df_survey, map_input)
         return subplot.dash_plot()
     else:
@@ -228,14 +242,15 @@ def display_location_info(*args):
     Returns:
     html component: Displaying the location information.
     """
+    args = str(args)
     ctx = callback_context
     if not ctx.triggered:
         return None
     button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    
     out =html.H1(f"{button_id}", style={'color': '#ffffff', 'textAlign': 'center',
                                         'background': '#343a40', 'padding': '10px',
-                                        'margin-bottom': '10px'}),
-
+                                        'margin-bottom': '10px'})
     return out
 
 if __name__ == '__main__':
