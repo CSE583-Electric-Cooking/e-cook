@@ -1,5 +1,5 @@
 import os 
-from dash import Dash, html, dcc, callback, callback_context, Output, Input
+from dash import Dash, html, dcc, callback, callback_context, dash_table, Output, Input
 import dash_leaflet as dl
 import plotly.express as px
 from plotly.subplots import make_subplots
@@ -8,7 +8,7 @@ import pandas as pd
 import module 
 
 
-class plot_ts:
+class plot_time_series:
 
     def __init__(self,dff,columns,selected_data_source, kosko_status):
         self.dff = dff
@@ -18,8 +18,8 @@ class plot_ts:
 
     def dash_plot(self):
         fig = make_subplots(rows=len(self.columns), cols=1, subplot_titles=self.columns)
-        background_color = '#282828'  # Dark gray to match your app's background
-        paper_color = '#343a40'       # Slightly lighter gray for the figure's background
+        background_color = '#282828'  
+        paper_color = '#343a40'       
         for i, col in enumerate(self.columns, start=1):
             method = f"{self.selected_data_source}"
   
@@ -95,6 +95,52 @@ class plot_ts:
             return method
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
+class plot_survey:
+    def __init__(self, dff, survey_selection):
+        self.dff = dff[dff["community_name"] == survey_selection]
+        
+        self.groups = sorted(set(col.split("/")[0] for col in self.dff.columns if "/" in col))
+        self.grouped_data = {group: self.dff[[col for col in self.dff.columns if col.startswith(group + "/")]] for group in self.groups}
+
+    def dash_plot(self):
+            fig = make_subplots(rows=len(self.grouped_data), cols=1, subplot_titles=[g.capitalize() for g in self.groups])
+            background_color = '#282828'
+            paper_color = '#343a40'
+
+            for i, (group, data) in enumerate(self.grouped_data.items(), start=1):
+                # Check if all values in the group are zero
+                if (data == 0).all().all():
+                    # Create an empty plot for the group
+                    fig.add_trace(
+                        go.Bar(x=[], y=[], name="No Data"),
+                        row=i, col=1
+                    )
+
+                    fig.update_xaxes(showticklabels=False, row=i, col=1)
+                    fig.update_yaxes(showticklabels=False, row=i, col=1)
+                else:
+                    for col in data.columns:
+                        simplified_col = col.split("/")[-1]
+                        if simplified_col == "a2ei":
+                            simplified_col = simplified_col.upper()
+
+                        Y = [data[col].values[0]]
+                        if sum(Y) > 0:
+                            fig.add_trace(
+                                go.Bar(x=[simplified_col.replace("_", " ").capitalize()], y=[data[col].values[0]], name=simplified_col),
+                                row=i, col=1
+                            )
+
+            fig.update_layout(
+                height=300 * len(self.grouped_data),
+                showlegend=False,
+                plot_bgcolor=background_color,
+                paper_bgcolor=paper_color,
+                font=dict(color='white')
+            )
+
+            return fig
+
 coordinates = {
     "Kyebando Kisalosalo": (0.3561, 32.5800),
     "Makerere": (0.3350, 32.5700),
@@ -109,17 +155,10 @@ coordinates = {
 }
 
 
-
 data_path = os.path.join(module.__path__[0], '..')
-
-
 df_kosko = pd.read_csv(os.path.join(f"{data_path}/data/", 'Kosko/Kosko_processed.csv'))
 df_a2ei = pd.read_csv(os.path.join(f"{data_path}/data/", 'A2EI/A2EI_processed.csv'))
-df_survey = pd.read_csv(os.path.join(f"{data_path}/data/", 'Survey/Consumption Monitoring Survey_modified.csv'))
-
-#external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-
+df_survey = pd.read_csv(os.path.join(f"{data_path}/data/", 'Survey/survey_app_data.csv'))
 
 app = Dash(__name__)
 
@@ -156,11 +195,6 @@ app.layout = html.Div([
 
     ], style={'background': '#333','padding': '10px', 'width': '30%', 'display': 'inline-block'}),
     
-    html.Div(
-        dcc.Graph(id='graph-content'),
-        id='graph-container'  
-    ),
-
     html.Div([
         html.Div([
             html.H1("Kampala, Uganda", style={'color': '#ffffff', 'textAlign': 'center', 'background': '#343a40', 'padding': '10px', 'margin-bottom': '10px'}),
@@ -181,8 +215,12 @@ app.layout = html.Div([
             ),
         html.Div(id="location-info")
         ], id='map-container', style={'backgroundColor': '#343a40','display': 'block'})  # Initial display style
-    ], style={'backgroundColor': '#343a40', 'padding': '30px', 'color': '#FFF', 'display': 'flex', 'justifyContent': 'center'})
-    
+    ], style={'backgroundColor': '#343a40', 'padding': '30px', 'color': '#FFF', 'display': 'flex', 'justifyContent': 'center'}),
+
+    html.Div(
+        dcc.Graph(id='graph-content'),
+        id='graph-container'  
+    ),
 ],style={'backgroundColor': '#333','padding': '30px'})
 
 @callback(
@@ -204,19 +242,23 @@ def update_dropdown_options(selected_data_source):
     
 @callback(
     [Output('graph-content', 'style'),Output('dropdown-selection', 'style'), Output('map-container', 'style')],
-    [Input('data-source-selection', 'value')]
+    [Input('data-source-selection', 'value'),Input("location-info",'children')]
 )
-def hide_graph(selected_data_source):
+def hide_graph(selected_data_source,survey_selection):
     if selected_data_source == "survey":
-        return {'display': 'None'}, {'display': 'None'}, {'display':'block'}
+        if survey_selection == None:
+            return {'display': 'None'}, {'display': 'None'}, {'display':'block'}
+        else:
+            return {'display': 'block'}, {'display': 'None'}, {'display':'block'}
     else:
         return {'display': 'block'}, {'background': '#333'}, {'display': 'None'}
 
 @callback(
     Output('graph-content', 'figure'),
-    [Input('data-source-selection', 'value'), Input('dropdown-selection', 'value'),Input('device-on-off', 'value')]
+    [Input('data-source-selection', 'value'), Input('dropdown-selection', 'value'),Input('device-on-off', 'value'),Input("location-info",'children')]
 )
-def update_graph(selected_data_source, selected_account_id, kosko_status):
+def update_graph(selected_data_source, selected_account_id, kosko_status, survey_selection):
+    flag = True
     if selected_data_source == 'kosko':
         dff = df_kosko[df_kosko['ID'] == selected_account_id]
         columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
@@ -226,14 +268,20 @@ def update_graph(selected_data_source, selected_account_id, kosko_status):
         dff = df_a2ei[df_a2ei['ID'] == selected_account_id]
         columns_to_exclude = ["ID", "TIME"]
     elif selected_data_source == 'survey':
-        return go.Figure()
+        ### GET DATA FROM MAP CLICKS
+        if survey_selection == None:
+            return go.Figure()
+        else:
+            map_input = str(survey_selection[0]['props']['children'])
+            subplot = plot_survey(df_survey, map_input)
+            return subplot.dash_plot()
     else:
         dff = pd.DataFrame()
         columns_to_exclude = []
         
-
     columns = [col for col in dff.columns if col not in columns_to_exclude]
-    subplot = plot_ts(dff,columns,selected_data_source,kosko_status)
+    subplot = plot_time_series(dff,columns,selected_data_source,kosko_status)
+
     
     return subplot.dash_plot()
 
@@ -255,10 +303,14 @@ def show_hidden_dropdown(selected_data_source):
 def display_location_info(*args):
     ctx = callback_context
     if not ctx.triggered:
-        return "Click on a marker to learn more about the location."
+        return None
     else:
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-        return html.P(f"Information about {button_id}: [Replace this with actual information about {button_id}]")
+        out =html.H1(f"{button_id}", style={'color': '#ffffff', 'textAlign': 'center', 
+                                            'background': '#343a40', 'padding': '10px', 
+                                            'margin-bottom': '10px'}),
+
+        return out
 
 if __name__ == '__main__':
     app.run_server(debug=True)

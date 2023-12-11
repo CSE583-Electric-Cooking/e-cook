@@ -28,6 +28,9 @@ def process_name(string_in, mode):
         words = string_in.split(" ")
         for word in words:
             string_in = string_in.replace(word.lower(),word.capitalize())
+        
+        if string_in[-1] == " ":
+            string_in = string_in[:len(string_in)-1]
 
     if mode in ["electricity_payment_to/","appliances/"]:
         string_in = string_in.split("/")[-1]
@@ -93,14 +96,26 @@ if __name__ == "__main__":
 
     for column in columns_to_reduce:
         names, data = column_reduction(df,column)
+        if "modality" in column:
+            names = [f"modality/{name}" for name in names]
+        elif "gender" in column:
+            names = [f"gender/{name}" for name in names]
+        elif "rent" in column:
+            names = [f"ownership/{name}" for name in names]
+        elif "Sensor" in column:
+            names = [f"sensor/{name}" for name in names]
         df_out[names] = data
 
     for column in columns_n_to_reduce:
         names, data = column_reduction_n(df,column)
+        if "appliances" in column:
+            names = [f"appliance/{name}" for name in names]
+        elif "payment" in column:
+            names = [f"payment/{name}" for name in names]
         df_out[names] = data
 
     df_out = remove_sparse_columns(df_out)
-    df_out.to_csv("../data/Survey/survey_app_data.csv")
+    df_out.to_csv("../data/Survey/survey_app_data.csv", index = False)
     
    
 
