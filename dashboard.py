@@ -247,7 +247,6 @@ def display_location_info(*args):
     if not ctx.triggered:
         return None
     button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-    
     out =html.H1(f"{button_id}", style={'color': '#ffffff', 'textAlign': 'center',
                                         'background': '#343a40', 'padding': '10px',
                                         'margin-bottom': '10px'})
