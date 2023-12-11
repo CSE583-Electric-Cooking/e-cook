@@ -102,6 +102,28 @@ class plot_survey:
             paper_color = '#343a40'
 
             for i, (group, data) in enumerate(self.grouped_data.items(), start=1):
+                """
+                if (data == 0).all().all():
+                    fig.add_trace(
+                        go.Bar(x=[], y=[], name="No Data"),
+                        row=i, col=1
+                    )
+
+                    fig.update_xaxes(showticklabels=False, row=i, col=1)
+                    fig.update_yaxes(showticklabels=False, row=i, col=1)
+                else:
+                    for col in data.columns:
+                        simplified_col = col.split("/")[-1]
+                        if simplified_col == "a2ei":
+                            simplified_col = simplified_col.upper()
+
+                        Y = [data[col].values[0]]
+                        if sum(Y) > 0:
+                            fig.add_trace(
+                                go.Bar(x=[simplified_col.replace("_", " ").capitalize()], y=[data[col].values[0]], name=simplified_col),
+                                row=i, col=1
+                            )
+                """
                 self.bar(fig,data,i)
 
 
