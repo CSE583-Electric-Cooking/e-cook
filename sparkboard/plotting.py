@@ -178,7 +178,7 @@ class PlotSurvey:
             showlegend=False,
             plot_bgcolor=background_color,
             paper_bgcolor=paper_color,
-            font=dict(color='white')
+            font={'color':'white'}
         )
         return fig
 
