@@ -140,11 +140,7 @@ def update_dropdown_options(selected_data_source):
     """
 
     if selected_data_source == 'kosko':
-        def name_func(i): #Simple function to name ids in same format as csv
-            if i < 100:
-                return f"0{i}"
-            return i
-        return [{'label': f"EM-{name_func(i)}", 'value': i} for i in df_kosko['ID'].unique()]
+        return [{'label': f"EM-{i}", 'value': i} for i in df_kosko['ID'].unique()]
     if selected_data_source == 'a2ei':
         return [{'label': i, 'value': i} for i in df_a2ei['ID'].unique()]
     return []

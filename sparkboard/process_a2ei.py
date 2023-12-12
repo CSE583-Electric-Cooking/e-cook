@@ -16,7 +16,7 @@ class A2EI:
 
     Constructors: None
     """
-    def __init__(self,raw = True):
+    def __init__(self,path,raw = True):
         if raw:
             self.df = pd.read_csv("../data/A2EI/A2EI.csv")
             self.process()
@@ -59,9 +59,6 @@ class A2EI:
         self.df['measurementTime'] = self.df['measurementTime'].apply(reformat)
         self.df['sourceCreatedAt'] = self.df['sourceCreatedAt'].apply(reformat)
         self.df['createdOn'] = self.df['createdOn'].apply(reformat)
-        #self.df['measurementTime'] = np.array(pd.to_datetime(self.df['measurementTime']))
-        #self.df['sourceCreatedAt'] = pd.to_datetime(self.df['sourceCreatedAt'])
-        #self.df['createdOn'] = pd.to_datetime(self.df['createdOn'])
 
     def pad_zeros(self):
         """

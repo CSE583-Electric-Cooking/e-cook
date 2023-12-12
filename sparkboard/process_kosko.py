@@ -23,7 +23,7 @@ class Kosko:
     kosko_instance = Kosko()
     processed_data = kosko_instance.df
     """
-    def __init__(self):
+    def __init__(self,raw = True):
         """
         Initializes the Kosko class. If 'Kosko_processed.csv' does not
         exist, it reads and processes CSV files from the '../data/Kosko' directory
@@ -32,7 +32,7 @@ class Kosko:
         """
         os.chdir("../data/Kosko")
         kosko_data = sorted(os.listdir())
-        if not "Kosko_processed.csv" in kosko_data:
+        if raw:
             ids = []
             data = []
             for kd in kosko_data:
@@ -40,17 +40,13 @@ class Kosko:
                     id = kd.split("_")[1]
                     ids.append(id)
                     data.append(pd.read_csv(kd))
-
             for d,id in zip(data, ids):
-                d["ID"] = id
-
+                if id < 100:
+                    id = f"0{id}"
+                d["ID"] = str(id)
 
             self.df = pd.concat(data, axis=0, ignore_index=True)
-            self.df['TIME'] = self.df['TIME'].apply(lambda x: '20' + x)
-            self.df['TIME'] = pd.to_datetime(self.df['TIME'], format='%Y-%m-%d %H:%M:%S', errors='coerce')
-            self.df['TIME'] = np.array(self.df['TIME'])
-            self.df = self.df.sort_values(by=['ID', 'TIME'])
-            self.df = self.df[self.df['TIME'].dt.year != 2022]
+            self.process()
 
             self.df.to_csv("Kosko_processed.csv", index=False)
         else:
@@ -59,4 +55,24 @@ class Kosko:
         
         os.chdir("../../module")
 
+    def process(self):
+        self.convert_date_time()
+        self.sort()
+        self.filter_year()
+
+    def convert_date_time(self):
+        self.df['TIME'] = self.df['TIME'].apply(lambda x: '20' + x)
+        self.df['TIME'] = pd.to_datetime(self.df['TIME'], format='%Y-%m-%d %H:%M:%S', errors='coerce')
+        self.df['TIME'] = np.array(self.df['TIME'])
+
+    def sort(self):
+        self.df = self.df.sort_values(by=['ID', 'TIME'])
+
+    def filter_year(self,year = 2022):
+        self.df = self.df[self.df['TIME'].dt.year != year]
+
+    def save_to_csv(self):
+        pass
+
+    
 
