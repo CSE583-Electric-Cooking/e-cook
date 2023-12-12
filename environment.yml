@@ -4,7 +4,6 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1=main
   - _openmp_mutex=5.1=1_gnu
-  - astroid=2.14.2=py312h06a4308_0
   - blas=1.0=mkl
   - bottleneck=1.3.5=py312ha883a20_0
   - brotli=1.0.9=h5eee18b_7
@@ -91,7 +90,6 @@ dependencies:
   - platformdirs=2.4.0=pyhd3eb1b0_0
   - plotly=5.9.0=py312h06a4308_0
   - ply=3.11=py312h06a4308_1
-  - pylint=2.16.2=py312h06a4308_0
   - pyparsing=3.0.9=py312h06a4308_0
   - pyqt=5.15.10=py312h6a678d5_0
   - pyqt5-sip=12.13.0=py312h5eee18b_0
@@ -120,6 +118,7 @@ dependencies:
   - zstd=1.5.5=hc292b87_0
   - pip:
       - ansi2html==1.8.0
+      - astroid==3.0.1
       - certifi==2023.11.17
       - charset-normalizer==3.3.2
       - dash==2.14.2
@@ -127,7 +126,9 @@ dependencies:
       - dash-table==5.0.0
       - idna==3.6
       - importlib-metadata==7.0.0
+      - kaleido==0.2.1
       - nest-asyncio==1.5.8
+      - pylint==3.0.3
       - requests==2.31.0
       - retrying==1.3.4
       - typing-extensions==4.8.0
