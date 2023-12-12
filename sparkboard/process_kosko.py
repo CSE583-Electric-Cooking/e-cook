@@ -7,6 +7,15 @@ Class can later be used for importing into main functinality as a tool to easili
 import os
 import pandas as pd
 import numpy as np
+import plotting
+
+
+## Navigate to Kosko
+plotting_path = os.path.abspath(plotting.__file__)
+package_root_path = os.path.dirname(plotting_path)
+parent_directory = os.path.dirname(package_root_path)
+data_directory = os.path.join(parent_directory, 'data/Kosko')
+
 
 class Kosko:
     """
@@ -23,38 +32,32 @@ class Kosko:
     kosko_instance = Kosko()
     processed_data = kosko_instance.df
     """
-    def __init__(self,raw = True):
+    def __init__(self,write_csv = False):
         """
         Initializes the Kosko class. If 'Kosko_processed.csv' does not
         exist, it reads and processes CSV files from the '../data/Kosko' directory
         and creates a master DataFrame. If the file already exists, it reads the
         preprocessed data.
         """
-        os.chdir("../data/Kosko")
-        kosko_data = sorted(os.listdir())
-        if raw:
-            ids = []
-            data = []
-            for kd in kosko_data:
-                if ".csv" in kd and "EM" in kd: #exclude non compliant files
-                    id = kd.split("_")[1]
-                    ids.append(id)
-                    data.append(pd.read_csv(kd))
-            for d,id in zip(data, ids):
-                if id < 100:
-                    id = f"0{id}"
-                d["ID"] = str(id)
+        kosko_data = sorted(os.listdir(data_directory))
 
-            self.df = pd.concat(data, axis=0, ignore_index=True)
-            self.process()
+        ids = []
+        data = []
+        for kd in kosko_data:
+            if ".csv" in kd and "EM" in kd: #exclude non compliant files
+                id = kd.split("_")[1]
+                ids.append(id)
+                data.append(pd.read_csv(f"{data_directory}/{kd}"))
+        for d,id in zip(data, ids):
+            d["ID"] = str(id)
 
+        self.df = pd.concat(data, axis=0, ignore_index=True)
+        self.process()
+
+        if write_csv:
             self.df.to_csv("Kosko_processed.csv", index=False)
-        else:
-            self.df = pd.read_csv("Kosko_processed.csv")
-
+    
         
-        os.chdir("../../module")
-
     def process(self):
         self.convert_date_time()
         self.sort()
