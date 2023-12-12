@@ -52,7 +52,7 @@ class PlotTimeSeries:
         paper_color = '#343a40'
         for i, col in enumerate(self.columns, start=1):
             method = f"{self.selected_data_source}"
-            func = getattr(self, method, None)
+            func = getattr(self, method)
             fig = func(fig,col,i)
         title = {"kosko": "Kosko Energy Report", "a2ei": "AE2I Energy Report"}
         fig.update_layout(

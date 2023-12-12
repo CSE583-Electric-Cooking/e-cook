@@ -2,8 +2,16 @@
 This script is utilized for the truncation of the large survey results
 into a more compact form for analysis in the dashboard application
 """
+import os
 import pandas as pd
 import numpy as np
+import plotting
+
+## Navigate to Kosko
+plotting_path = os.path.abspath(plotting.__file__)
+package_root_path = os.path.dirname(plotting_path)
+parent_directory = os.path.dirname(package_root_path)
+data_directory = os.path.join(parent_directory, 'data/Survey')
 
 def process_name(string_in, mode):
     """
@@ -118,7 +126,7 @@ def remove_sparse_columns(df):
     dout = df[dout]
     return dout
 
-def process_data_survey(path = None, write_csv = True):
+def process_data_survey(write_csv = True):
     """
     Processes survey data, reformats community names, reduces data in specified columns, 
     and writes the output to a CSV file.
@@ -130,10 +138,9 @@ def process_data_survey(path = None, write_csv = True):
     Returns:
     pd.DataFrame: The processed DataFrame.
     """
-    if path is None:
-        df = pd.read_csv("../data/Survey/Consumption Monitoring Survey_modified.csv")
-    else:
-        df = pd.read_csv(path)
+
+    df = pd.read_csv(f"{data_directory}/Consumption Monitoring Survey_modified.csv")
+
     df_out = pd.DataFrame({})
 
     df["community_name"] = df["community_name"].astype(str)
@@ -167,9 +174,5 @@ def process_data_survey(path = None, write_csv = True):
 
     df_out = remove_sparse_columns(df_out)
     if write_csv:
-        if path is None:
-            df_out.to_csv("../data/Survey/survey_app_data.csv", index=False)
-        else:
-            df_out.to_csv(f"{path}/survey_app_data.csv", index=False)
-
+        df_out.to_csv(f"{data_directory}//survey_app_data.csv", index=False)
     return df_out

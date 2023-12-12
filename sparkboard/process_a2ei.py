@@ -7,6 +7,16 @@ import os
 import pandas as pd
 import numpy as np
 
+import plotting
+
+
+## Navigate to Kosko
+plotting_path = os.path.abspath(plotting.__file__)
+package_root_path = os.path.dirname(plotting_path)
+parent_directory = os.path.dirname(package_root_path)
+data_directory = os.path.join(parent_directory, 'data/A2EI')
+
+
 class A2EI:
     """
     class: A2EI
@@ -16,23 +26,21 @@ class A2EI:
 
     Constructors: None
     """
-    def __init__(self,path,raw = True):
-        if raw:
-            self.df = pd.read_csv("../data/A2EI/A2EI.csv")
-            self.process()
-            data = {}
-            data['TIME'] = np.array(self.df['measurementTime'].values)
-            data['VOLTAGE'] = self.df['meteredVoltageA']
-            data['CURRENT'] = self.df['currentA']
-            data['FREQUENCY'] = self.df['frequency']
-            data['POWER'] = self.df['meteredPower']
-            data['POWER FACTOR'] = self.df['powerFactorA']
-            data['ID'] = self.df['account_id']
-            self.df = pd.DataFrame(data)
-            self.save_to_csv()
-
-        else:
-            self.df = pd.read_csv("../data/A2EI/A2EI_processed.csv")
+    def __init__(self,write_csv = False):
+        
+        self.df = pd.read_csv(f"{data_directory}/A2EI.csv")
+        self.process()
+        data = {}
+        data['TIME'] = self.df['measurementTime'].values
+        data['VOLTAGE'] = self.df['meteredVoltageA'].values.astype(float)
+        data['CURRENT'] = self.df['currentA'].values.astype(float)
+        data['FREQUENCY'] = self.df['frequency'].values.astype(float)
+        data['POWER'] = self.df['meteredPower'].values.astype(float)
+        data['POWER FACTOR'] = self.df['powerFactorA'].values.astype(float)
+        data['ID'] = self.df['account_id'].values.astype(int)
+        self.df = pd.DataFrame(data)
+        if write_csv:
+            self.df.to_csv(f"{data_directory}/A2EI_processed.csv", index=False)
 
         
     def convert_date_time(self):
@@ -76,17 +84,6 @@ class A2EI:
         """
         self.convert_date_time()
         self.pad_zeros()
-
-    def save_to_csv(self, path=None):
-        """
-        Save the current DataFrame to a CSV file. If no path is provided, it writes the name as processed.
-
-        input: path - Optional string path to save the CSV file. If None, uses default name.
-        """
-        if path is None:
-            path = "../data/A2EI/A2EI_processed.csv"  # Default path to the original file
-
-        self.df.to_csv(path, index=False)
 
     def append_csv(self, path):
         """

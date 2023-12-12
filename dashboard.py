@@ -140,7 +140,12 @@ def update_dropdown_options(selected_data_source):
     """
 
     if selected_data_source == 'kosko':
-        return [{'label': f"EM-{i}", 'value': i} for i in df_kosko['ID'].unique()]
+        def name_logic(i):
+            if int(i) < 100:
+                i = f"0{i}"
+                return i
+            return str(i)
+        return [{'label': f"EM-{name_logic(i)}", 'value': name_logic(i)} for i in df_kosko['ID'].unique()]
     if selected_data_source == 'a2ei':
         return [{'label': i, 'value': i} for i in df_a2ei['ID'].unique()]
     return []
@@ -214,7 +219,7 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
         return go.Figure()
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = PlotTimeSeries(dff,columns,selected_data_source,kosko_status)
-
+    
     return subplot.dash_plot()
 
 @app.callback(
