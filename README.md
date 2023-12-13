@@ -5,6 +5,42 @@
 </p>
 
 This is a repository for the CSE 583 class project. The purpose of this project is to develop a software to analyze, synthesize, and process data from electric meter sensors along with individual surveys to understand trends with regards to power quality when electric cooking events are occuring in informal communities in Kampala, Uganda. The software will output a dashboard with data visualization to assist researchers, inform policies, enable decision-making for electric utilities, and provide usage information for community members.  
+## Repo Structure
+This following is the tree for this project:
+```
+CSE583-Electric-Cooking/
+├── assets/
+│   └── style.css
+├── data/
+│   ├── A2EI/
+│   ├── Kosko/
+│   └── Surveys/
+├── doc/
+│   ├── Component Specification.md
+│   ├── Electric Cooking Technology Review.pdf
+│   ├── Electric Cooking Technology Review.pptx
+│   ├── Functional Design.md/
+│   └── Interaction Diagram.pdf
+├── example/
+│   └── example.md
+├── sparkboard/
+│   ├── images/
+│   ├── tests/
+│   │   ├──__init__.py
+│   │   └──test_main.py
+│   ├── __init__.py
+│   ├── plotting.py
+│   ├── process_a2ei.py
+│   ├── process_kosko.py
+│   ├── process_survey.py
+│   ├── processing.py
+│   └── setup.py
+│   └── data_processing/
+├── LICENSE
+├── README.md
+├── dashboard.py   
+└── environment.yml
+```
 
 ## How to run the dashboard  
 1. Download the repository onto your local system.  
