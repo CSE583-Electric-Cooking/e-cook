@@ -74,8 +74,8 @@ class Kosko:
         4. Converts the resulting datetime objects to a NumPy array.
         """
         self.df['TIME'] = self.df['TIME'].apply(lambda x: '20' + x)
-        self.df['TIME'] = pd.to_datetime(self.df['TIME'], 
-                                         format='%Y-%m-%d %H:%M:%S', 
+        self.df['TIME'] = pd.to_datetime(self.df['TIME'],
+                                         format='%Y-%m-%d %H:%M:%S',
                                          errors='coerce')
         self.df['TIME'] = np.array(self.df['TIME'])
 
