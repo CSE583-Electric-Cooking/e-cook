@@ -56,6 +56,7 @@ def process_name(string_in, mode):
     if mode in ["electricity_payment_to/","appliances/"]:
         string_in = string_in.split("/")[-1]
         return string_in
+    return None
 
 def column_reduction(df, column):
     """
