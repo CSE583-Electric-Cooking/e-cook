@@ -5,13 +5,15 @@ into a more compact form for analysis in the dashboard application
 import os
 import pandas as pd
 import numpy as np
-import plotting
+import sparkboard.plotting
 
 ## Navigate to Kosko
-plotting_path = os.path.abspath(plotting.__file__)
+plotting_path = os.path.abspath(sparkboard.plotting.__file__)
 package_root_path = os.path.dirname(plotting_path)
 parent_directory = os.path.dirname(package_root_path)
-data_directory = os.path.join(parent_directory, 'data/Survey')
+ecook = os.path.dirname(parent_directory)
+data_directory = os.path.join(ecook, 'data/Survey')
+
 
 def process_name(string_in, mode):
     """

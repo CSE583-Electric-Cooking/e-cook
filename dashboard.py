@@ -16,7 +16,7 @@ from dash import Dash, html, dcc, callback, callback_context, Output, Input
 import dash_leaflet as dl
 import plotly.graph_objs as go
 import sparkboard as sb
-from sparkboard.plotting import PlotSurvey,PlotTimeSeries
+from sparkboard.plotting import plotting
 # Decimal GPS Coordinates for different communities in Kampala, Uganda
 coordinates = {
     "Kyebando Kisalosalo": (0.3561, 32.5800),
@@ -215,13 +215,13 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
         if survey_selection is None:
             return go.Figure()
         map_input = str(survey_selection['props']['children'])
-        subplot = PlotSurvey(df_survey, map_input)
+        subplot = plotting.PlotSurvey(df_survey, map_input)
         return subplot.dash_plot()
     else:
         return go.Figure()
     
     columns = [col for col in dff.columns if col not in columns_to_exclude]
-    subplot = PlotTimeSeries(dff,columns,selected_data_source,kosko_status)
+    subplot = plotting.PlotTimeSeries(dff,columns,selected_data_source,kosko_status)
     return subplot.dash_plot()
 
 @app.callback(
