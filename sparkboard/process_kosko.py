@@ -2,7 +2,7 @@
 This script serves to process data for the Kosko sensor:
     1) convert dates to time series
     2) appends multiple CSV files into a master list
-Class can later be used for importing into main functinality as a tool to easiliy access processed data
+Class can later be used to import into main functinality as a tool to easiliy access processed data
 """
 import os
 import pandas as pd
@@ -56,8 +56,7 @@ class Kosko:
 
         if write_csv:
             self.df.to_csv("Kosko_processed.csv", index=False)
-    
-        
+
     def process(self):
         self.convert_date_time()
         self.sort()
@@ -65,7 +64,9 @@ class Kosko:
 
     def convert_date_time(self):
         self.df['TIME'] = self.df['TIME'].apply(lambda x: '20' + x)
-        self.df['TIME'] = pd.to_datetime(self.df['TIME'], format='%Y-%m-%d %H:%M:%S', errors='coerce')
+        self.df['TIME'] = pd.to_datetime(self.df['TIME'], 
+                                         format='%Y-%m-%d %H:%M:%S', 
+                                         errors='coerce')
         self.df['TIME'] = np.array(self.df['TIME'])
 
     def sort(self):
@@ -76,6 +77,3 @@ class Kosko:
 
     def save_to_csv(self):
         pass
-
-    
-
