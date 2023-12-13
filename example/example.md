@@ -13,5 +13,5 @@
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/144302124/9139f32a-3f51-4222-a1ac-8958c8d36add)  
 
 
-## Click on a neighborhood to dispaly the survey results
+## Click on a neighborhood to display the survey results
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/144302124/847b4ab4-f6ac-4099-9f4d-7843a84f6ded)
