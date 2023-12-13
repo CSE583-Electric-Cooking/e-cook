@@ -20,8 +20,8 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
         conda env update --file environment.yml --name base
-        conda activate ecook
     - name: Unit testing
     
       run: |
