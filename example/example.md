@@ -9,9 +9,9 @@
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/144302124/d94f6d44-514a-43db-8b27-b041d59b91c9)  
 
 
-## Click on `Survey' in the first bar and navigate to the map containing neighbordhoods that were survey
+## Click on `Survey` to navigate to the map containing neighbordhoods that were surveyed
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/144302124/9139f32a-3f51-4222-a1ac-8958c8d36add)  
 
 
-## Click on a neighborhood to pull up the survey results
+## Click on a neighborhood to dispaly the survey results
 ![image](https://github.com/CSE583-Electric-Cooking/e-cook/assets/144302124/847b4ab4-f6ac-4099-9f4d-7843a84f6ded)
