@@ -27,7 +27,6 @@ class A2EI:
     Constructors: None
     """
     def __init__(self,write_csv = False):
-        
         self.df = pd.read_csv(f"{data_directory}/A2EI.csv")
         self.process()
         data = {}
@@ -42,7 +41,6 @@ class A2EI:
         if write_csv:
             self.df.to_csv(f"{data_directory}/A2EI_processed.csv", index=False)
 
-        
     def convert_date_time(self):
         """
         convert string values to datatime object
@@ -57,13 +55,12 @@ class A2EI:
                 data_string = data_string.replace("T", " ")
 
                 if '.' in data_string: # Extract data after "."
-                    data_string = data_string[:data_string.index('.')] 
+                    data_string = data_string[:data_string.index('.')]
 
                 return data_string
             else:
                 # Return the original value if it's not a string
                 return data_string
-        
         self.df['measurementTime'] = self.df['measurementTime'].apply(reformat)
         self.df['sourceCreatedAt'] = self.df['sourceCreatedAt'].apply(reformat)
         self.df['createdOn'] = self.df['createdOn'].apply(reformat)
