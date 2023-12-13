@@ -90,8 +90,3 @@ class Kosko:
         Filter the DataFrame to exclude entries from a specified year.
         """
         self.df = self.df[self.df['TIME'].dt.year != year]
-
-    def save_to_csv(self):
-        """
-        Save the dataframe to a csv file
-        """
