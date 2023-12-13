@@ -58,11 +58,21 @@ class Kosko:
             self.df.to_csv("Kosko_processed.csv", index=False)
 
     def process(self):
+        """
+        1. Convert date and time columns in the DataFrame.
+        2. Sort the DataFrame.
+        3. Filter the DataFrame based on the year.
+        """
         self.convert_date_time()
         self.sort()
         self.filter_year()
 
     def convert_date_time(self):
+        """
+        1. Adds '20' to the beginning of each entry in the 'TIME' column.
+        2. Converts the 'TIME' column to datetime using the specified format '%Y-%m-%d %H:%M:%S'.
+        4. Converts the resulting datetime objects to a NumPy array.
+        """
         self.df['TIME'] = self.df['TIME'].apply(lambda x: '20' + x)
         self.df['TIME'] = pd.to_datetime(self.df['TIME'], 
                                          format='%Y-%m-%d %H:%M:%S', 
@@ -70,10 +80,19 @@ class Kosko:
         self.df['TIME'] = np.array(self.df['TIME'])
 
     def sort(self):
+        """
+        Sort the DataFrame based on the 'ID' and 'TIME' columns.
+        """
         self.df = self.df.sort_values(by=['ID', 'TIME'])
 
     def filter_year(self,year = 2022):
+        """
+        Filter the DataFrame to exclude entries from a specified year.
+        """
         self.df = self.df[self.df['TIME'].dt.year != year]
 
     def save_to_csv(self):
+        """
+        Save the dataframe to a csv file
+        """
         pass
