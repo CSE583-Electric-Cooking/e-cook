@@ -145,7 +145,7 @@ def update_dropdown_options(selected_data_source):
                 i = f"0{i}"
                 return i
             return str(i)
-        return [{'label': f"EM-{name_logic(i)}", 'value': name_logic(i)} 
+        return [{'label': f"EM-{name_logic(i)}", 'value': name_logic(i)}
                 for i in df_kosko['ID'].unique()]
     if selected_data_source == 'a2ei':
         return [{'label': i, 'value': i} for i in df_a2ei['ID'].unique()]
