@@ -18,3 +18,6 @@ This is a repository for the CSE 583 class project. The purpose of this project 
 ```  
 3. Click the hyperlink that appears on the shell screen to open `SparkBoard` in your web browser.
 4. Toggle between the meter data sets (A2EI and Kosko) and the survey data to see different visualizations of the data. Refer to the examples folder for further information on how to use the software package.
+
+
+[![Python Package using Conda](https://github.com/CSE583-Electric-Cooking/e-cook/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/CSE583-Electric-Cooking/e-cook/actions/workflows/python-package-conda.yml)
