@@ -28,12 +28,14 @@ CSE583-Electric-Cooking/
 │   ├── tests/
 │   │   ├──__init__.py
 │   │   └──test_main.py
+│   ├── plotting/
+│   │   ├──__init__.py
+│   │   └──plotting.py
 │   ├── __init__.py
 │   ├── plotting.py
 │   ├── process_a2ei.py
 │   ├── process_kosko.py
 │   ├── process_survey.py
-│   ├── processing.py
 │   └── setup.py
 │   └── data_processing/
 ├── LICENSE
