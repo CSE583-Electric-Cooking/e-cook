@@ -202,7 +202,6 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
     object: Plotly graph object.
     """
     if selected_data_source == 'kosko':
-        
         dff = df_kosko[df_kosko['ID'] == selected_account_id]
         columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
         if not kosko_status == "ONOFF":
@@ -219,7 +218,6 @@ def update_graph(selected_data_source, selected_account_id, kosko_status, survey
         return subplot.dash_plot()
     else:
         return go.Figure()
-    
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,selected_data_source,kosko_status)
     return subplot.dash_plot()

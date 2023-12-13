@@ -5,7 +5,6 @@
 """
 import os
 import pandas as pd
-import numpy as np
 import sparkboard.plotting
 ## Navigate to Kosko
 plotting_path = os.path.abspath(sparkboard.plotting.__file__)
@@ -56,9 +55,7 @@ class A2EI:
                     data_string = data_string[:data_string.index('.')]
 
                 return data_string
-            else:
-                # Return the original value if it's not a string
-                return data_string
+            return data_string
         self.df['measurementTime'] = self.df['measurementTime'].apply(reformat)
         self.df['sourceCreatedAt'] = self.df['sourceCreatedAt'].apply(reformat)
         self.df['createdOn'] = self.df['createdOn'].apply(reformat)
@@ -70,7 +67,7 @@ class A2EI:
         input: self reference to dataframe
         """
         self.df = self.df.fillna(0)
-    
+
     def process(self):
         """
         runs processing functions
