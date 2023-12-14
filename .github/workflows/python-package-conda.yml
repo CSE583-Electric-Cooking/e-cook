@@ -30,7 +30,7 @@ jobs:
 
     - name: Conda environment creation
       run: |
-        conda env create -f environment.yml
+        #conda env create -f environment.yml
         conda activate ecook
       
     #- name: Install dependencies
