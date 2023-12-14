@@ -28,10 +28,11 @@ jobs:
         environment-file: environment.yml
         activate-environment: ecook
 
-    - name: Conda environment creation
-      run: |
+    #- name: Conda environment creation
+      #run: |
         #conda env create -f environment.yml
-        conda activate ecook
+        #conda activate ecook
+        #activate
       
     #- name: Install dependencies
       #run: |
