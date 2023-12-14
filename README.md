@@ -60,5 +60,8 @@ CSE583-Electric-Cooking/
 3. Click the hyperlink that appears on the shell screen to open `SparkBoard` in your web browser.
 4. Toggle between the meter data sets (A2EI and Kosko) and the survey data to see different visualizations of the data. Refer to the examples folder for further information on how to use the software package.
 
+### Caution: OS Compatibility
+The software is currently undergoing testing for compatibility across multiple OS platforms. Please note, that macOS users may currently experience failures when running tests involving image comparison. These failures will need to undergo thorough review by the development team to diagnose issues. Subsequent versions intend to resolve this issue.
+
 
 [![Python Package using Conda](https://github.com/CSE583-Electric-Cooking/e-cook/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/CSE583-Electric-Cooking/e-cook/actions/workflows/python-package-conda.yml)
