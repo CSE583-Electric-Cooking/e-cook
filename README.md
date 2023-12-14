@@ -6,8 +6,6 @@
 
 This is a repository for the CSE 583 class project. The purpose of this project is to develop a software to analyze, synthesize, and process data from electric meter sensors along with individual surveys to understand trends with regards to power quality when electric cooking events are occuring in informal communities in Kampala, Uganda. The software will output a dashboard with data visualization to assist researchers, inform policies, enable decision-making for electric utilities, and provide usage information for community members.  
 
-https://docs.google.com/presentation/d/1Eioyd7BJhzDEZN0DP9kcuu4rF51_Ng9KOpNJeVF1xq0/edit
-
 ## Repo Structure
 This following is the tree for this project:
 ```
