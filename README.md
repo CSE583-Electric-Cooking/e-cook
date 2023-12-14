@@ -38,7 +38,6 @@ CSE583-Electric-Cooking/
 │   ├── process_kosko.py
 │   ├── process_survey.py
 │   └── setup.py
-│   └── data_processing/
 ├── LICENSE
 ├── README.md
 ├── dashboard.py   
