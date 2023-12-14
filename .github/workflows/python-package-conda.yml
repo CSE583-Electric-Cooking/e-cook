@@ -41,6 +41,4 @@ jobs:
     - name: Unit testing
     
       run: |
-        ls
-        conda activate ecook
         python -m unittest
