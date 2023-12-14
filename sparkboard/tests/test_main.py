@@ -8,11 +8,13 @@ import unittest
 import pandas as pd
 import numpy as np
 from PIL import Image, ImageOps
+
 from ..plotting import plotting
 from ..process_survey import process_name, column_reduction, column_reduction_n
 from ..process_survey import remove_sparse_columns,process_data_survey
 from ..process_kosko import Kosko
 from ..process_a2ei import A2EI
+
 
 plotting_path = os.path.abspath(plotting.__file__)
 parent_directory = os.path.dirname(plotting_path)
@@ -178,8 +180,8 @@ def smoke_time_series_kosko_onoff():
     """
     Test to see if call to the plotting function runs on ON/OFF
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ONOFF"
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"kosko",kosko_status)
@@ -190,8 +192,8 @@ def smoke_time_series_kosko_on():
     """
     Test to see if call to the plotting function runs ON
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ON"
     dff = dff[dff["DEVICE STATUS"] == kosko_status]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
@@ -204,8 +206,8 @@ def smoke_time_series_kosko_off():
     Kosko
     Test to see if call to the plotting function runs OFF
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "OFF"
     dff = dff[dff["DEVICE STATUS"] == kosko_status]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
@@ -218,15 +220,15 @@ def one_shot_kosko_time_series_plotting_nominal_onoff():
     Kosko
     Compare output png to freshly generated png, compare based on Frobenius norm of error (ONOFF)
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ONOFF"
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"kosko",kosko_status)
     fig = subplot.dash_plot()
-    fig.write_image(f"{package_root_path}/images/test_{df_kosko["ID"][0]}_{kosko_status}.png")
-    path1 = f"{package_root_path}/images/test_{df_kosko["ID"][0]}_{kosko_status}.png"
-    path2 = f"{package_root_path}/images/kosko_{df_kosko["ID"][0]}_{kosko_status}.png"
+    fig.write_image(f"{package_root_path}/images/test_{df_kosko['ID'][0]}_{kosko_status}.png")
+    path1 = f"{package_root_path}/images/test_{df_kosko['ID'][0]}_{kosko_status}.png"
+    path2 = f"{package_root_path}/images/kosko_{df_kosko['ID'][0]}_{kosko_status}.png"
     return image_similarity(path1,path2)
 
 def one_shot_kosko_time_series_plotting_nominal_on():
@@ -234,16 +236,16 @@ def one_shot_kosko_time_series_plotting_nominal_on():
     Kosko
     Compare output png to freshly generated png, compare based on Frobenius norm of error (ON)
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ON"
     dff = dff[dff["DEVICE STATUS"] == kosko_status]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"kosko",kosko_status)
     fig = subplot.dash_plot()
-    fig.write_image(f"{package_root_path}/images/test_{df_kosko["ID"][0]}_{kosko_status}.png")
-    path1 = f"{package_root_path}/images/test_{df_kosko["ID"][0]}_{kosko_status}.png"
-    path2 = f"{package_root_path}/images/kosko_{df_kosko["ID"][0]}_{kosko_status}.png"
+    fig.write_image(f"{package_root_path}/images/test_{df_kosko['ID'][0]}_{kosko_status}.png")
+    path1 = f"{package_root_path}/images/test_{df_kosko['ID'][0]}_{kosko_status}.png"
+    path2 = f"{package_root_path}/images/kosko_{df_kosko['ID'][0]}_{kosko_status}.png"
     return image_similarity(path1,path2)
 
 def one_shot_kosko_time_series_plotting_nominal_off():
@@ -251,16 +253,16 @@ def one_shot_kosko_time_series_plotting_nominal_off():
     Kosko
     Compare output png to freshly generated png, compare based on Frobenius norm of error (OFF)
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "OFF"
     dff = dff[dff["DEVICE STATUS"] == kosko_status]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"kosko",kosko_status)
     fig = subplot.dash_plot()
-    fig.write_image(f"{package_root_path}/images/test_{df_kosko["ID"][0]}_{kosko_status}.png")
-    path1 = f"{package_root_path}/images/test_{df_kosko["ID"][0]}_{kosko_status}.png"
-    path2 = f"{package_root_path}/images/kosko_{df_kosko["ID"][0]}_{kosko_status}.png"
+    fig.write_image(f"{package_root_path}/images/test_{df_kosko['ID'][0]}_{kosko_status}.png")
+    path1 = f"{package_root_path}/images/test_{df_kosko['ID'][0]}_{kosko_status}.png"
+    path2 = f"{package_root_path}/images/kosko_{df_kosko['ID'][0]}_{kosko_status}.png"
     return image_similarity(path1,path2)
 
 def one_shot_kosko_time_series_plotting_abnormal_onoff():
@@ -269,16 +271,16 @@ def one_shot_kosko_time_series_plotting_abnormal_onoff():
     Compare output png to freshly generated incorrectpng, 
     compare based on Frobenius norm of error (ONOFF)
     """
-    id_ = df_kosko["ID"].unique()[1]
+    id_ = df_kosko['ID'].unique()[1]
     dff = df_kosko[df_kosko['ID'] == id_]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ONOFF"
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"kosko",kosko_status)
     fig = subplot.dash_plot()
     fig.write_image(f"{package_root_path}/images/test_{id_}_{kosko_status}.png")
     path1 = f"{package_root_path}/images/test_{id_}_{kosko_status}.png"
-    path2 = f"{package_root_path}/images/kosko_{df_kosko["ID"][0]}_{kosko_status}.png"
+    path2 = f"{package_root_path}/images/kosko_{df_kosko['ID'][0]}_{kosko_status}.png"
     return image_similarity(path1,path2)
 
 def one_shot_kosko_time_series_plotting_abnormal_on():
@@ -287,9 +289,9 @@ def one_shot_kosko_time_series_plotting_abnormal_on():
     Compare output png to freshly generated incorrectpng, 
     compare based on Frobenius norm of error (ON)
     """
-    id_ = df_kosko["ID"].unique()[1]
+    id_ = df_kosko['ID'].unique()[1]
     dff = df_kosko[df_kosko['ID'] == id_]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ON"
     dff = dff[dff["DEVICE STATUS"] == kosko_status]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
@@ -297,7 +299,7 @@ def one_shot_kosko_time_series_plotting_abnormal_on():
     fig = subplot.dash_plot()
     fig.write_image(f"{package_root_path}/images/test_{id_}_{kosko_status}.png")
     path1 = f"{package_root_path}/images/test_{id_}_{kosko_status}.png"
-    path2 = f"{package_root_path}/images/kosko_{df_kosko["ID"][0]}_{kosko_status}.png"
+    path2 = f"{package_root_path}/images/kosko_{df_kosko['ID'][0]}_{kosko_status}.png"
     return image_similarity(path1,path2)
 
 def one_shot_kosko_time_series_plotting_abnormal_off():
@@ -306,9 +308,9 @@ def one_shot_kosko_time_series_plotting_abnormal_off():
     Compare output png to freshly generated incorrectpng, 
     compare based on Frobenius norm of error (OFF)
     """
-    id_ = df_kosko["ID"].unique()[1]
+    id_ = df_kosko['ID'].unique()[1]
     dff = df_kosko[df_kosko['ID'] == id_]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "OFF"
     dff = dff[dff["DEVICE STATUS"] == kosko_status]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
@@ -316,7 +318,7 @@ def one_shot_kosko_time_series_plotting_abnormal_off():
     fig = subplot.dash_plot()
     fig.write_image(f"{package_root_path}/images/test_{id_}_{kosko_status}.png")
     path1 = f"{package_root_path}/images/test_{id_}_{kosko_status}.png"
-    path2 = f"{package_root_path}/images/kosko_{df_kosko["ID"][0]}_{kosko_status}.png"
+    path2 = f"{package_root_path}/images/kosko_{df_kosko['ID'][0]}_{kosko_status}.png"
     return image_similarity(path1,path2)
 
 def smoke_time_series_a2ei():
@@ -325,7 +327,7 @@ def smoke_time_series_a2ei():
     Test to see if call to the plotting function runs 
     """
     dff = df_a2ei[df_a2ei['ID'] == 1935]
-    columns_to_exclude = ["ID", "TIME"]
+    columns_to_exclude = ['ID', "TIME"]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"a2ei",None)
     fig = subplot.dash_plot()
@@ -337,7 +339,7 @@ def one_shot_a2ei_time_series_plotting_nominal():
     Compare output png to freshly generated png, compare based on Frobenius norm of error
     """
     dff = df_a2ei[df_a2ei['ID'] == 1935]
-    columns_to_exclude = ["ID", "TIME"]
+    columns_to_exclude = ['ID', "TIME"]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"a2ei",None)
     fig = subplot.dash_plot()
@@ -354,7 +356,7 @@ def one_shot_a2ei_time_series_plotting_abnominal():
     compare based on Frobenius norm of error
     """
     dff = df_a2ei[df_a2ei['ID'] == 1931]
-    columns_to_exclude = ["ID", "TIME"]
+    columns_to_exclude = ['ID', "TIME"]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"a2ei",None)
     fig = subplot.dash_plot()
@@ -402,8 +404,8 @@ def one_shot_attribute_kosko():
     """
     Test atttribute call returning proper method Kosko
     """
-    dff = df_kosko[df_kosko['ID'] == df_kosko["ID"][0]]
-    columns_to_exclude = ["ID", "TIME", "DEVICE STATUS"]
+    dff = df_kosko[df_kosko['ID'] == df_kosko['ID'][0]]
+    columns_to_exclude = ['ID', "TIME", "DEVICE STATUS"]
     kosko_status = "ONOFF"
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"kosko",kosko_status)
@@ -415,7 +417,7 @@ def one_shot_attribute_a2ei():
     Test atttribute call returning proper method A2EI
     """
     dff = df_a2ei[df_a2ei['ID'] == 1935]
-    columns_to_exclude = ["ID", "TIME"]
+    columns_to_exclude = ['ID', "TIME"]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"a2ei",None)
     method = getattr(subplot, "a2ei")
@@ -426,7 +428,7 @@ def edge_attribute_improper():
     Test atttribute call raising AttributeError for incorrect input
     """
     dff = df_a2ei[df_a2ei['ID'] == 1935]
-    columns_to_exclude = ["ID", "TIME"]
+    columns_to_exclude = ['ID', "TIME"]
     columns = [col for col in dff.columns if col not in columns_to_exclude]
     subplot = plotting.PlotTimeSeries(dff,columns,"a2ei",None)
     method = getattr(subplot, "IMPROPER")
@@ -495,7 +497,7 @@ class KoskoProcessing(unittest.TestCase):
     def test_one_shot_kosko_output(self):
         """Verify Kosko output columns and length."""
         columns, length = one_shot_kosko_output()
-        names = ["TIME","VOLTAGE","CURRENT","WATT","KWH","DEVICE STATUS","ID"]
+        names = ["TIME","VOLTAGE","CURRENT","WATT","KWH","DEVICE STATUS",'ID']
         self.assertEqual((columns,length), (names,len(names)))
 
     def test_final_data_types_kosko(self):
@@ -516,7 +518,7 @@ class A2EIProcessing(unittest.TestCase):
     def test_one_shot_a2ei_output(self):
         """Verify A2EI output columns and length."""
         columns, length = one_shot_a2ei_output()
-        names = ["TIME","VOLTAGE","CURRENT","FREQUENCY","POWER","POWER FACTOR","ID"]
+        names = ["TIME","VOLTAGE","CURRENT","FREQUENCY","POWER","POWER FACTOR",'ID']
         self.assertEqual((columns,length), (names,len(names)))
 
     def test_one_shot_a2ei_output_data_types(self):
