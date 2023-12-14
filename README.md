@@ -61,4 +61,7 @@ CSE583-Electric-Cooking/
 The software is currently undergoing testing for compatibility across multiple OS platforms. Please note, that macOS users may currently experience failures when running tests involving image comparison. These failures will need to undergo thorough review by the development team to diagnose issues. Subsequent versions intend to resolve this issue.
 
 
+### Current Bug
+Currently continous integration is limited. Exact issue is being isolated and identified.
+
 [![Python Package using Conda](https://github.com/CSE583-Electric-Cooking/e-cook/actions/workflows/python-package-conda.yml/badge.svg)](https://github.com/CSE583-Electric-Cooking/e-cook/actions/workflows/python-package-conda.yml)
